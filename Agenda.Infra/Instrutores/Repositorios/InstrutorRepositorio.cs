@@ -1,6 +1,7 @@
 using Agenda.Dominio.Aulas.Entidades;
 using Agenda.Dominio.Instrutores.Entidades;
 using Agenda.Dominio.Instrutores.Repositorios;
+using Agenda.Dominio.Reservas.Entidades;
 using Libraries.NHibernate.Repositorios;
 using NHibernate;
 using NHibernate.Criterion;
@@ -16,7 +17,7 @@ namespace Agenda.Infra.Instrutores.Repositorios
          public IList<Instrutor> InstrutorEmAula(){
 
             DetachedCriteria CriteriaFilha =
-                   DetachedCriteria.For(typeof(Aula))
+                   DetachedCriteria.For(typeof(Reserva))
             .CreateAlias("Instrutor", "instrutor")
             .SetProjection(
                 Projections.Property("instrutor.Nome").As("Instrutor")
