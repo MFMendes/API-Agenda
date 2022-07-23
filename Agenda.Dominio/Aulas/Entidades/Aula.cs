@@ -8,15 +8,27 @@ using System.Threading.Tasks;
 
 namespace Agenda.Dominio.Aulas.Entidades
 {
-    public class Aula : Reserva
+    public class Aula
     {
+        public virtual int Id { get; protected set; }
+        public virtual int IdLocal { get; protected set; }
+        public virtual string Titulo { get; protected set; }
+        public virtual DateTime DataInicio { get; protected set; }
+        public virtual string HoraInicio { get; protected set; }
+        public virtual string HoraFim { get; protected set; }
+        public virtual DateTime? DeleteAt { get; protected set; }
+        public virtual string Descricao { get; protected set; }
         public virtual Instrutor Instrutor { get; protected set; }
-        public virtual int IdTurma{ get; protected set; }
-        public virtual int IdDisciplina { get; protected set; }
+        public virtual int? IdTurma { get; protected set; }
+        public virtual int? IdDisciplina { get; protected set; }
 
         public Aula(){  }
 
-        public Aula(Instrutor instrutor, int idTurma, int idDisciplina){
+        public Aula(int idLocal, string titulo, DateTime dataInicio,
+                    DateTime horaInicio, DateTime horaFim, DateTime deleteAt,
+                    string descricao,
+                    Instrutor instrutor, int idTurma, int idDisciplina)
+        { 
             SetInstrutor(instrutor);
             SetTurma(idTurma);
             SetDisciplina(idDisciplina);
