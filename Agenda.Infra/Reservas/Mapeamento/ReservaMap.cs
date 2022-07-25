@@ -17,12 +17,12 @@ namespace Agenda.Infra.Reservas.Mapeamentos
             Id(p => p.Id).Column("ID");
             Map(x => x.Titulo).Column("TITULO").Not.Nullable();
             References(x => x.Instrutor).Column("ID_INSTRUTOR").Nullable();
-            Map(x => x.IdLocal).Column("ID_LOCAL").Not.Nullable();
-            Map(x => x.IdDisciplina).Column("ID_DISCIPLINA").Nullable();
-            Map(x => x.IdTurma).Column("ID_TURMA").Nullable();
+            References(x => x.Local).Column("ID_LOCAL").Not.Nullable();
+            References(x => x.Disciplina).Column("ID_DISCIPLINA").Nullable();
+            References(x => x.Turma).Column("ID_TURMA").Nullable();
             Map(x => x.Responsavel).Column("RESPONSAVEL").Nullable();
-            Map(x => x.DataInicio).Column("DATAINICIO").Not.Nullable();
-            Map(x => x.HoraInicio).Column("HORAINICIO").Not.Nullable();
+            Map(x => x.DataInicio).Column("DATAINICIO").CustomSqlType("Time").Not.Nullable();
+            Map(x => x.HoraInicio).Column("HORAINICIO").CustomSqlType("Time").Not.Nullable();
             Map(x => x.HoraFim).Column("HORAFIM").Not.Nullable();
             Map(x => x.Descricao).Column("DESCRICAO").Nullable();
             Map(x => x.DeleteAt).Column("DELETEAT").Nullable();

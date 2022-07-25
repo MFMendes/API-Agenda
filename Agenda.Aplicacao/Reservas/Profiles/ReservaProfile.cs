@@ -1,4 +1,5 @@
-﻿using Agenda.DataTransfer.Reservas.Responses;
+﻿using Agenda.DataTransfer.Reservas.Requests;
+using Agenda.DataTransfer.Reservas.Responses;
 using Agenda.Dominio.Reservas.Entidades;
 using AutoMapper;
 using Libraries.Dominio.Consultas;
@@ -14,7 +15,8 @@ namespace Agenda.Aplicacao.Reservas.Profiles
     {
         public ReservaProfile()
         {
-            CreateMap<Reserva, ReservaResponse>();
+            CreateMap<Reserva, ReservaResponse>();   
+
             CreateMap<PaginacaoConsulta<Reserva>, PaginacaoConsulta<ReservaResponse>>();
         }
     }

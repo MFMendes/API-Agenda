@@ -34,5 +34,13 @@ namespace Agenda.API.Controllers.Reservas
 
             return Ok(response);
         }
+
+        [HttpPost]
+        public ActionResult<ReservaResponse> InserirReserva([FromBody] ReservaInserirRequest request)
+        {
+            var response = reservasAppServico.AdicionarReserva(request);
+
+            return Ok(response);
+        }
     }
 }
