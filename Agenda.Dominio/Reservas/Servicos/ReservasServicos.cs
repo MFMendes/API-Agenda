@@ -1,10 +1,13 @@
 ﻿using Agenda.Dominio.Aulas.Repositorios;
 using Agenda.Dominio.Disciplinas.Entidades;
 using Agenda.Dominio.Disciplinas.Repositorios;
+using Agenda.Dominio.Disciplinas.Servicos.Interfaces;
 using Agenda.Dominio.Instrutores.Entidades;
 using Agenda.Dominio.Instrutores.Repositorios;
+using Agenda.Dominio.Instrutores.Servicos.Interfaces;
 using Agenda.Dominio.Locais.Entidades;
 using Agenda.Dominio.Locais.Repositorios;
+using Agenda.Dominio.Locais.Servicos.Interfaces;
 using Agenda.Dominio.Reservas.Entidades;
 using Agenda.Dominio.Reservas.Repositorios;
 using Agenda.Dominio.Reservas.Servicos.Interfaces;
@@ -20,13 +23,12 @@ namespace Agenda.Dominio.Reservas.Servicos
     public class ReservasServicos : IReservasServicos
     {
         public IReservaRepositorio reservaRepositorio { get; set; }
-        public IInstrutoresRepositorio instrutoresRepositorio { get; set; }
-        public IAulaRepositorio aulaRepositorio { get; set; }
-        public ILocaisRepositorio locaisRepositorio { get; set; }
-        public IDisciplinasRepositorio disciplinasRepositorio { get; set; }
-        public ReservasServicos(IReservaRepositorio reservaRepositorio, ILocaisRepositorio locaisRepositorio)
+        public IInstrutorServico instrutoresServico { get; set; }
+        public ILocaisServico locaisServico { get; set; }
+        public IDisciplinasServico disciplinasServico { get; set; }
+        public ReservasServicos(IReservaRepositorio reservaRepositorio, ILocaisServico locaisServico)
         {
-            this.locaisRepositorio = locaisRepositorio;
+            this.locaisServico = locaisServico;
             this.reservaRepositorio = reservaRepositorio;
         }
 
@@ -44,7 +46,7 @@ namespace Agenda.Dominio.Reservas.Servicos
 
         public bool ValidarHorario(int idlocal, DateTime dataInicio, TimeSpan horaInicio, TimeSpan horaFim)
         {
-            Local local = locaisRepositorio.Recuperar(idlocal);
+            Local local = locaisServico.Validar(idlocal);
 
             reservaRepositorio.LocalOcupado(local, dataInicio, horaInicio, horaFim);
 

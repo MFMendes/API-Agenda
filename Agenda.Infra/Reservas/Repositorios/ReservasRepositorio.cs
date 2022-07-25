@@ -23,19 +23,13 @@ namespace Agenda.Infra.Reservas.Repositorios
             var reserva = session.CreateCriteria<Reserva>()
                             .Add(Expression.Eq("Local", local))
                             .Add(Expression.Eq("DataInicio", dataInicio))
-                            .Add(Expression.Between("HoraInicio", horaInicio, horaFim))
-                            .Add(Expression.Between("HoraFim", horaInicio, horaFim))
+                            .Add(Expression.Sql("(( '"+ horaInicio + "' BETWEEN HoraInicio AND HoraFim) " +
+                                                "OR ('" + horaFim + "' BETWEEN HoraInicio AND HoraFim) " +
+                                                "OR (HoraInicio BETWEEN '" + horaInicio + "' AND '" + horaFim + "') " +
+                                                "OR (HoraFim BETWEEN '" + horaInicio + "' AND '" + horaFim + "'))"))
                             .List<Reserva>();
 
-            //var reserva = session.QueryOver<Reserva>()
-            //                .Where(r => r.Local == local)
-            //                .And(r => r.DataInicio == dataInicio)
-            //                .And(r => TimeSpan.Parse(r.HoraInicio) >= horaInicio)
-            //                .And(r => TimeSpan.Parse(r.HoraFim) <= horaInicio)
-
             return reserva.Count > 0 ? true : false;
-
-
         }
     }
 }
